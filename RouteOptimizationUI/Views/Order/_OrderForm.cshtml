@@ -1,0 +1,76 @@
+﻿@model RouteOptimization.Infrastructure.OrderViewModel
+
+<form action="/Order/Index" method="post" class=" smart-form">
+    <fieldset>
+        <div class="row">
+            <section class="col col-6">
+                <div class="row">
+                    <section class="col col-10">
+                        <label class="input">
+                            @Html.DropDownListFor(model => model.Order.RetailerID, (IEnumerable<SelectListItem>)ViewBag.RetailerID, "Retailer Name", new { id = "retailerID", name = "retailerID", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Order.RetailerID)
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-10">
+                        <label class="input">
+                            @Html.DropDownListFor(model => model.Order.StoreID, (IEnumerable<SelectListItem>)ViewBag.StoreID, "Store Name", new { id = "storeID", name = "storeID", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Order.StoreID)
+                        </label>
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-10">
+                        <label class="input">
+                            @Html.TextBoxFor(model => model.Order.DeliveryDate, new { id = "deliveryDate", name = "deliveryDate", @placeholder = "Delivery Date" })
+                            @Html.ValidationMessageFor(model => model.Order.DeliveryDate)
+                        </label>
+                    </section>
+                </div>
+
+                <div class="row">
+                    <section class="col col-10">
+                        <label class="input">
+                            @Html.TextBoxFor(model => model.Order.Status, new { id = "status", name = "status", @placeholder = "Status" })
+                            @Html.ValidationMessageFor(model => model.Order.Status)
+                        </label>
+                    </section>
+                </div>
+            </section>
+            <section class="col col-6">
+                <div class="row">
+                    <section class="col col-6">
+                        <div id="OrderProducts">
+                            @{if (Model.OrderedProducts != null)
+                            {
+                                @Html.Partial("_ProductsForm", Model.OrderedProducts.ToList())
+                            }
+                            }
+
+                        </div>
+                        @*<label class="input">
+                                @{
+                                    List<SelectListItem> listdata = new List<SelectListItem>();
+                                    bool isSelected = false;
+                                    foreach (var item in Model.AllProducts)
+                                    {
+                                        listdata.Add(new SelectListItem
+                                   {
+                                       Text = item.Name,
+                                       Value = item.Name.ToString(),
+                                       Selected = isSelected
+                                   });
+                                    }
+                                };
+                                @Html.ListBoxFor(model => model.AllProducts, listdata, new { id = "list", name = "list", @class = "form-control" });
+                            </label>*@
+                    </section>
+                </div>
+            </section>
+        </div>
+    </fieldset>
+</form>
+
+

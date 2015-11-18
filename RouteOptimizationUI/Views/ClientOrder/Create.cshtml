@@ -1,0 +1,221 @@
+﻿@model RouteOptimization.Infrastructure.ClientOrderViewModel
+
+<script>
+    function DateSelect() {
+        $("#datepicker").datepicker();
+    }
+</script>
+
+
+
+@*<script>
+        function CreateDict() {
+            debugger;
+            $
+
+            $.ajax({
+                url: '/ClientOrder/CreateDict',
+                type: 'POST',
+                success: function (response) {
+                    alert("ajaxSuccess");
+                },
+                error: function () {
+                    alert("inner error");
+                }
+
+            });
+
+
+        }
+    </script>*@
+
+
+<script>
+    function CreateOrder() {
+
+        var RetailerID = $("#RetailerID").val();
+        
+        var StoreID = $("#StoreID").val();
+        
+        var datepicker = $("#datepicker").val();
+        
+
+        
+        var mydata = JSON.stringify({ RetailerID: RetailerID, StoreID: StoreID, datepicker: datepicker });
+        $.ajax({
+
+            url: '/ClientOrder/CreateOrder',
+            //url: '/ClientOrder/CreateFinal',
+            contentType: 'application/json; charset=utf-8',
+            type: 'POST',
+            async: false,
+            data: mydata,
+            //dataType: 'json',
+            success: function (res) {
+               
+                //var orderid = res;
+                //var mydata = JSON.stringify({ orderid: orderid });
+                //alert(orderid);
+
+                //$.ajax({
+                //    url: '/ClientOrder/GetOrderList',
+                //    contentType: 'application/json; charset=utf-8',
+                //    type: 'POST',
+                //  async: false,
+                //    data: mydata,
+                //    success: function (response) {
+                //        alert("innerAjaxSuccess");
+                //        alert(response);
+                //        $("dvOrderList").html(response);
+                //    },
+                //    error: function () {
+                //        alert("inner error");
+                //    }
+
+                //});
+            }
+
+        });
+    }
+
+
+</script>
+
+
+<div id="dvFormClientOrder">
+
+    <section id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-0" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-colorbutton="false">
+                    <header role="heading">
+                        <span class="widget-icon"><i class="fa fa-edit"></i></span>
+                        <h2>New Order:</h2>
+                    </header>
+                    <div>
+                        <div id="storeForm" class="widget-body no-padding">
+
+                            <fieldset>
+                                <form name="clientorderForm" id="clientorderForm" method="post" class=" smart-form">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.Order.OrderID)
+                                    @Html.ValidationSummary(true)
+                                    <div class="row">
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                @Html.DropDownList("RetailerID", (IEnumerable<SelectListItem>)ViewBag.RetailerID,"-Please Select Retailer-", new { id = "RetailerID", name = "RetailerID", @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Order.RetailerID)
+                                            </label>
+                                        </section>
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                @Html.DropDownList("StoreID", (IEnumerable<SelectListItem>)ViewBag.StoreID,"-Please Select Store-", new { id = "StoreID", name = "StoreID", @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.Order.StoreID)
+                                            </label>
+                                        </section>
+                                    </div>
+                                   
+
+
+                                    <div class="row">
+                                        <section class="col col-6">
+                                            <label class="input">
+
+                                                @Html.DropDownListFor(model => model.prod, new SelectList(Model.AllProducts, "ProductID", "Name"),"- Please Select Product-", new { id = "prod", name = "prod", @class = "form-control" })
+                                                @Html.ValidationMessageFor(model => model.AllProducts)
+
+                                            </label>
+
+                                        </section>
+                                        <section class="col col-6">
+                                            <label class="input">
+
+                                                @Html.TextBoxFor(model => model.Quantity, new { id = "quantity", name = "quantity",  @class = "text-label", @placeholder = "Quantity" })
+                                                @Html.ValidationMessageFor(model => model.Quantity)
+                                            </label>
+                                        </section>
+                                   
+                                        
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                Date: <input type="text" id="datepicker" name="datepicker" onclick="DateSelect();">
+
+                                            </label>
+                                        </section>
+                                    </div>
+
+
+
+
+                                    <footer>
+                                        <button type="submit" id="save" class="btn btn-primary">
+                                            Save
+                                        </button>
+                                        @*<button type="button" id="order" class="btn btn-primary" onclick="location.href='@Url.Action("CreateOrder", "ClientOrder")'" >*@
+                                        @*<button type="submit" id="order" class="btn btn-primary" onclick='this.form.action = "/ClientOrder/CreateOrder"'>*@
+
+                                        <button type="submit" id="order" class="btn btn-primary" onclick="CreateOrder();">
+                                            Order
+                                        </button>
+
+                                        @*<button type="submit" id="orderList" class="btn btn-primary" onclick="GetOrderList();">
+                                                Show List
+                                            </button>*@
+
+                                        @*<button type="submit" id="orderList" class="btn btn-primary" onclick="location.href='@Url.Action("GetOrderList", "ClientOrder")'">
+                                                Show List
+                                            </button>*@
+                                    </footer>
+                                </form>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+
+
+
+<div class="row">
+
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+
+            <header>
+                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                <h2>Ordered Products:</h2>
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">
+                </div>
+
+                <div class="widget-body no-padding">
+                    <div id="dvOrderList">
+
+                        @{
+                            if (Model.OrderedProducts != null)
+                            {
+                                @Html.Partial("_ClientOrderList", Model.OrderedProducts.ToList())
+
+
+
+                            }
+                        }
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </article>
+</div>

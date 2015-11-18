@@ -1,0 +1,119 @@
+﻿@model RouteOptimization.Infrastructure.StoreViewModel
+
+
+
+<script>
+    function EditStoreList() {
+      
+        var ID = $("#ID").val();
+            var name = $("#Name").val();
+            var storeNumber = $("#storeNumber").val();
+            var retailerID = $("#retailerID").val();
+            var emailID = $("#emailID").val();
+            var phone = $("#phone").val();
+            var Address1 = $("#Address1").val();
+            var Address2 = $("#Address2").val();
+            var Postal = $("#Postal").val();
+            var Province = $("#State").val();
+            var Country = $("#Country").val();
+            var City = $("#city").val();
+
+            if (ID == "") {
+                ID = 0;
+            }
+
+            var mydata = JSON.stringify({ID: ID,name: name, storeNumber: storeNumber, retailerID: retailerID, emailID: emailID, phone: phone, Address1:Address1, Address2:Address2, City:City, Province:Province,Country:Country, Postal:Postal });
+
+            $.ajax({
+                url: '/Store/Create',
+                contentType: 'application/json; charset=utf-8',
+                type: 'POST',
+                async: false,
+               // dataType: 'json',
+                data: mydata,
+
+                success: function (res) {
+                    alert(res);
+                    $.ajax({
+                        url: '/Store/Index',
+                        type: 'POST',
+                        success: function (response) {
+                            
+                            $("dvStoreList").html(response);
+                        },
+                        error: function (xhr, status, error) {
+
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                        }
+
+                    });
+                },
+
+                error: function (xhr, status, error) {
+
+                    console.log(xhr);
+                    console.log(status);
+                    console.log(error);
+                    
+
+                }
+                
+            });
+
+    }
+</script>
+
+
+
+<div id="dvFormStore">
+
+    <section id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-0" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-colorbutton="false">
+                    <header role="heading">
+                        <span class="widget-icon"><i class="fa fa-edit"></i></span>
+                        <h2>New Store:</h2>
+                    </header>
+                    <div>
+                        <div id="storeForm" class="widget-body no-padding">
+                            @Html.Partial("_FrmStore");
+                        </div>
+     </div></div>
+        </article>
+    </div>
+</section>
+    </div>
+
+
+
+                    
+    <div class="row">
+
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                    <h2>Store List:</h2>
+                </header>
+                <div>
+                    <div class="jarviswidget-editbox">
+                    </div>
+
+                    <div class="widget-body no-padding">
+                        <div id="dvStoreList">
+                            @Html.Partial("_Store", Model.AllStores.ToList())
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </div>
+
+
+

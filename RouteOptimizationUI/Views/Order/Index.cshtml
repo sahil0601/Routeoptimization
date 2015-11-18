@@ -1,0 +1,12 @@
+﻿@model RouteOptimization.Infrastructure.OrderViewModel
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<div id="orderForm">
+    @Html.Partial("_OrderForm", Model)
+</div>
+
+<div id="dvOrderList">
+    @Html.Partial("_Order", Model.AllOrders.ToList())
+</div>

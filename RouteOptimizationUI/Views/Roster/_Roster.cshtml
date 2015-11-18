@@ -1,0 +1,174 @@
+﻿
+@model RouteOptimization.Infrastructure.RosterViewModel
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+
+<script>
+    function AssignOrder() {
+
+
+
+
+    //    debugger;
+        var orderList = new Array();
+
+
+
+
+        $('input[type=checkbox]:checked').each(function () {
+                   orderList.push($(this).attr('value'));
+        });
+
+           for(var i=0;i<orderList.length;i++)
+            {
+               // alert(orderList[i]);
+            }
+
+
+
+        var userID=$("#selectUser").val();
+      //  alert(userID);
+        var dateselect=$("#datepicker").val();
+      //  alert(dateselect);
+
+      //  debugger;
+
+            $.ajax({
+
+               url: '/Roster/Create',
+                contentType: 'application/json; charset=utf-8',
+                type: 'POST',
+                async: false,
+                data: {selectOrder: orderList, selectUser: userID, datepicker: dateselect},
+
+             //   dataType: 'json',
+                success: (function (res) {
+                  //  alert("success");
+                  // $("#dvRetailerList").html(res);
+                }),
+                error: function () {
+
+                }
+            });
+
+
+
+
+      //  alert("here is the jquery");
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#map").click(function () {
+                    $.ajax({
+                        url: "/Roster/ViewMap",
+                        type: "GET",
+                        //data: { i: ((val * 1) + 1) }
+                    })
+                    .done(function (partialViewResult) {
+                        $("#userDetail").html(partialViewResult);
+                    
+            });
+            return false;
+        })
+    });
+
+</script>
+
+
+
+<script>
+  function DateSelect() {
+    $( "#datepicker" ).datepicker();
+  }
+</script>
+
+<form name="assignOrderForm" id="assignOrderForm" class=" smart-form" action="/Roster/Create">
+    <!--@* using (@Html.BeginForm("Create","Roster",FormMethod.Post))
+    { *@-->
+    <div style="width: 100%; height: 400px; overflow: scroll; border: 5px black; background-color: #ccc;">
+        <table class="table">
+
+            @foreach (var order in Model.allOrders)
+            {
+                
+                <tr>
+
+@if (order.Status == "PE")
+{
+    <td class="info" width="25px" >
+        <input type="checkbox" name="selectOrder" id="selectOrder" value="@order.OrderID" />
+    </td>
+
+                    <td class="info" width="75px">Store:<br>Retailer:<br>Delivery Date:</td>
+    <td class="info">
+        @order.Store.Name<br>@order.Retailer.Name<br>@order.DeliveryDate<br>
+
+    </td>
+}
+else
+{
+    <td class="danger" width="25px">
+        <input type="checkbox" name="selectOrder" id="selectOrder" value="@order.OrderID" />
+    </td>
+                        <td class="danger" width="75px">Store:<br>Retailer:<br>Delivery Date:</td>
+    <td class="danger">
+        @order.Store.Name<br>@order.Retailer.Name<br>@order.DeliveryDate<br>
+
+    </td>
+                    }
+                </tr>
+
+            }
+        </table>
+</div>
+        <table class="table">
+            <tr>
+                <td>
+                    <select name="selectUser" id="selectUser">
+                        <option>Select User</option>
+                        @foreach (var user in Model.allUsers)
+                        {
+                            <option value="@user.UserID">@user.FirstName&nbsp;@user.LastName</option>
+                        }
+
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Date: <input type="text" id="datepicker" name="datepicker" onclick="DateSelect();">
+                </td>
+            </tr>
+
+        </table>
+
+        <input type="submit" id="assignOrder" class="btn btn-primary" value="Assign" onclick="AssignOrder();">
+
+</form>
+<form id="ss">
+    @*<input type="submit" id="map" class="map" value="show Map" />
+
+
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-0" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-colorbutton="false">
+                <header role="heading">
+                    <span class="widget-icon"><i class="fa fa-edit"></i></span>
+                    <h2>Users Detail</h2>
+                </header>
+                <div role="content">
+                    <div id="userDetail" class="widget-body no-padding">
+                        @Html.Partial("ViewMap", Model.GetAdreessForMap())
+
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>*@
+</form>

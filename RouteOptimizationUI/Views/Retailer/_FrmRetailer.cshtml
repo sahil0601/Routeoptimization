@@ -1,0 +1,75 @@
+﻿@model RouteOptimization.Infrastructure.RetailerViewModel
+
+<section id="widget-grid">
+
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-0" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-colorbutton="false">
+                <header role="heading">
+                    <span class="widget-icon"><i class="fa fa-edit"></i></span>
+                    <h2>New Retailer</h2>
+                </header>
+                <div>
+                    <div id="retailerForm" class="widget-body no-padding">
+                        <form name="retailerForm" id="retailer_form" method="post" class=" smart-form">
+                            <fieldset>
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.retailer.RetailerID, new { id="ID"})
+                                @Html.ValidationSummary(true)
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-user"></i>
+                                            @Html.TextBoxFor(model => model.retailer.Name, new { id="Name", name="Name", @placeholder = "Retailer Name" })
+                                            @Html.ValidationMessageFor(model => model.retailer.Name)
+                                        </label>
+
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-briefcase"></i>
+                                            @Html.TextBoxFor(model => model.retailer.RetailerNumber, new { id="RetailerNumber",name="RetailerNumber", @placeholder = "Retailer Number" })
+                                            @Html.ValidationMessageFor(model => model.retailer.RetailerNumber)
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-envelope-o"></i>
+                                            @Html.TextBoxFor(model => model.retailer.EmailID, new { id = "EmailID", name="EmailID", @placeholder = "Email ID" })
+                                            @Html.ValidationMessageFor(model => model.retailer.EmailID)
+                                        </label>
+                                    </section>
+                                
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-phone"></i>
+                                            @Html.TextBoxFor(model => model.retailer.Phone, new { id="Phone",name="Phone", @placeholder = "Phone Number" })
+                                            @Html.ValidationMessageFor(model => model.retailer.Phone)
+                                        </label>
+                                    </section>
+                                    @*<section class="col col-6">
+                                        <label class="input">
+                                            
+                                            @Html.DropDownList("AddressID",(IEnumerable<SelectListItem>)ViewBag.AddressID, new { name="AddressID", @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.retailer.AddressID)
+                                        </label>
+                                    </section>*@
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <button type="submit" id="save" class="btn btn-primary" onclick="EditRetailerList();">
+                                    Save
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

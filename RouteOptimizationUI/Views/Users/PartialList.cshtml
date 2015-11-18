@@ -1,0 +1,285 @@
+﻿@model IEnumerable<RouteOptimization.Infrastructure.Data.ViewModel.UserViewModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript">
+
+        function Remove() {
+            $('.dele').on('click', function () {
+                //Do something to get id.
+                //Get the delete button id if it is the id you want to use for deletion.
+                var id = $(this).data('key');
+                var fileID = id;
+                var params = "{'id': '" + fileID + "'}";
+              //  alert(fileID);
+                var flag = confirm('You are about to delete the User?');
+                if (flag) {
+                    $.ajax({
+                        url: "/Users/Delete",
+                        type: "GET",
+                        data: { id: fileID },
+                        success: function (result) {
+                            var val = 1;
+                            $.ajax({
+                                url: "/Users/Partial",
+                                type: "GET",
+                                data: { i: ((val * 1) + 1) }
+                            })
+                            .done(function (partialViewResult) {
+                                $("#userDetail").html(partialViewResult);
+                            });
+                            alert("Details Deleted.");
+                        },
+                        error: function (msg) {
+                            alert("error");
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+
+    <script type="text/javascript">
+        function Edit() {
+            $('.edt').on('click', function () {
+                debugger;
+
+            var id = $(this).data('key');
+            var fileID = id;
+            var params = "{'id': '" + fileID + "'}";
+                $.ajax({
+                    url: "/Users/Edit",
+                    type: "GET",
+                    data: { id: fileID },
+                    success: function (result) {
+                        alert(result);
+                        $("#form-horizontal").html(result);
+                        $.each(result, function (i, item) {
+                            alert(item.value);
+                            //if (item.field == "Address1") {
+                            //    $("#Address1").val(item.value);
+                            //} else if (item.field == "Address2") {
+                            //    $("#Address2").val(item.value);
+                            //}
+                        });
+                        alert("Details.");
+                    },
+                    error: function (msg) {
+                        alert("error");
+                    }
+                });
+        })
+    }
+    </script>
+</head>
+
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <form id="mylist" method="post">
+            <div id="userDetail">
+                <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                    <thead>
+                        <tr>
+                            <th><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> @Html.DisplayNameFor(model => model.FirstName)</th>
+
+                            <th><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> @Html.DisplayNameFor(model => model.LastName)</th>
+                            <th>@Html.DisplayNameFor(model => model.EmailID)</th>
+                            <th><i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i> @Html.DisplayNameFor(model => model.Phone)</th>
+                            <th>@Html.DisplayNameFor(model => model.Type)</th>
+                            <th><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> @Html.DisplayNameFor(model => model.Address1)</th>
+                            <th><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> @Html.DisplayNameFor(model => model.Address2)</th>
+                            <th><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> @Html.DisplayNameFor(model => model.City)</th>
+                            <th><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> @Html.DisplayNameFor(model => model.Province)</th>
+                            <th><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> @Html.DisplayNameFor(model => model.Country)</th>
+                            <th><i class="fa fa-fw fa-map-marker txt-color-blue hidden-md hidden-sm hidden-xs"></i> @Html.DisplayNameFor(model => model.PostalCode)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EmailID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>
+                                @*<td>
+                                    @Html.DisplayFor(modelItem => item.AddressID)
+                                </td>*@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address2)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Province)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Country)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostalCode)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                                    @*@Html.ActionLink("Details", "Details", new { id=item.UserId }) |*@
+                                    @*<a class="edt" data-key="@item.UserId" href="javascript:Edit();">Edit</a>*@
+
+                                    <a class="dele" data-key="@item.UserId" href="javascript:Remove();">Delete</a>
+
+                                    @*@Html.ActionLink(
+                                    "Delete",
+                                    "Delete",
+                                    new { id = item.UserId },
+                                    new { @class = "Del", onclick = "return Remove("+ item.UserId+")" } )*@
+                                    @*@Html.ActionLink("Delete", "Delete", new { id=item.UserId })*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+
+
+
+
+
+
+            @*<table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FirstName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.LastName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EmailID)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Phone)
+                                    </th>
+                                    @*<th>
+                                            @Html.DisplayNameFor(model => model.AddressID)
+                                        </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Type)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.City)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Province)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Country)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PostalCode)
+                            </th>
+
+                            <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmailID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Phone)
+                                    </td>
+                                    @*<td>
+                                            @Html.DisplayFor(modelItem => item.AddressID)
+                                        </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Type)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Address1)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Address2)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.City)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Province)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Country)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PostalCode)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                                        @Html.ActionLink("Details", "Details", new { id=item.UserId }) |
+
+
+                                        Ajax.ActionLink(" ", "deleteMeeting", new { id = item.UserId }, new AjaxOptions
+                                             {
+                                             Confirm = "Are you sure you wish to delete?",
+                                            // UpdateTargetId = "Appointments",
+                                             HttpMethod = "Get",
+                                             InsertionMode = InsertionMode.Replace,
+                                             LoadingElementId = "div_loading"
+                                             }, new { @class = "DeleteApointmentsforevent" })
+
+
+                                        @Html.ActionLink(
+                "Delete",
+                "Delete",
+                new { id = item.UserId },
+                new { onclick = "return confirm('Are you sure you wish to delete this article?');" })
+
+                                        Html.ActionLink("Delete", "Delete", new { id=item.UserId })
+                                    </td>
+                                </tr>
+            }
+
+                            </table>*@
+</form>
+</body>
+</html>
+
+
