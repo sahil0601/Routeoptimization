@@ -1,0 +1,138 @@
+﻿@model RouteOptimization.Infrastructure.ProductViewModel
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@section Scripts {
+    <script>
+        function EditStore(item) {
+            $.ajax({
+                url: '/Products/GetProductList',
+                contentType: 'application/json; charset=utf-8',
+                type: 'POST',
+                dataType: 'JSON'
+
+            })
+            .success(function (result) {
+                $('#dvProductList').html(result);
+            })
+            .error(function (xhr, status) {
+                alert(status);
+            })
+        };
+    </script>
+}
+<section id="widget-grid">
+
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-0" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-colorbutton="false">
+                <header role="heading">
+                    <span class="widget-icon"><i class="fa fa-edit"></i></span>
+                    <h2>New Product:</h2>
+                </header>
+                <div>
+                    <div id="productForm" class="widget-body no-padding">
+                        <form action="/Product/Create" method="post" class=" smart-form">
+                            <fieldset>
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.Product.ProductID)
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-briefcase"></i>
+                                            @Html.TextBoxFor(model => model.Product.Name, new { @placeholder = "Product Name" })
+                                            @Html.ValidationMessageFor(model => model.Product.Name)
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-briefcase"></i>
+                                            @Html.TextBoxFor(model => model.Product.ProductNumber, new { @placeholder = "Product Number" })
+                                            @Html.ValidationMessageFor(model => model.Product.ProductNumber)
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-envelope-o"></i>
+                                            @Html.TextBoxFor(model => model.Product.ListPrice, new { @placeholder = "List Price" })
+                                            @Html.ValidationMessageFor(model => model.Product.ListPrice)
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-briefcase"></i>
+                                            @Html.TextBoxFor(model => model.Product.Size, new { @placeholder = "Size" })
+                                            @Html.ValidationMessageFor(model => model.Product.Size)
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-envelope-o"></i>
+                                            @Html.TextBoxFor(model => model.Product.Weight, new { @placeholder = "Weight" })
+                                            @Html.ValidationMessageFor(model => model.Product.Weight)
+                                        </label>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <button type="submit" id="save" class="btn btn-primary">
+                                    Save
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+<!--DataTable start-->
+<div class="row">
+
+    <!-- NEW WIDGET START -->
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+            <!-- widget options:
+            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+            -->
+            <header>
+                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                <h2>Product List:</h2>
+
+            </header>
+
+            <!-- widget div-->
+            <div>
+
+                <!-- widget edit box -->
+                <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+
+                </div>
+                <!-- end widget edit box -->
+                <!-- widget content -->
+                <div class="widget-body no-padding">
+                    @Html.Partial("_Product", Model.AllProducts.ToList())
+                </div>
+
+            </div>
+        </div>
+    </article>
+</div>
+

@@ -1,0 +1,18 @@
+C:\Users\Paramjyot\Source\Repos\RouteOptimization3\RouteOptimization.Core\bin\Debug\RouteOptimization.Core.dll
+C:\Users\Paramjyot\Source\Repos\RouteOptimization3\RouteOptimization.Core\bin\Debug\RouteOptimization.Core.pdb
+C:\Users\Paramjyot\Source\Repos\RouteOptimization3\RouteOptimization.Core\bin\Debug\RouteOptimization.Infrastructure.dll
+C:\Users\Paramjyot\Source\Repos\RouteOptimization3\RouteOptimization.Core\bin\Debug\EntityFramework.dll
+C:\Users\Paramjyot\Source\Repos\RouteOptimization3\RouteOptimization.Core\bin\Debug\RouteOptimization.Infrastructure.pdb
+C:\Users\Paramjyot\Source\Repos\RouteOptimization3\RouteOptimization.Core\bin\Debug\EntityFramework.xml
+C:\Users\Paramjyot\Source\Repos\RouteOptimization3\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.csprojResolveAssemblyReference.cache
+C:\Users\Paramjyot\Source\Repos\RouteOptimization3\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.dll
+C:\Users\Paramjyot\Source\Repos\RouteOptimization3\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.pdb
+D:\capstone version2\RouteOptimization3\RouteOptimization.Core\bin\Debug\RouteOptimization.Core.dll
+D:\capstone version2\RouteOptimization3\RouteOptimization.Core\bin\Debug\RouteOptimization.Core.pdb
+D:\capstone version2\RouteOptimization3\RouteOptimization.Core\bin\Debug\RouteOptimization.Infrastructure.dll
+D:\capstone version2\RouteOptimization3\RouteOptimization.Core\bin\Debug\EntityFramework.dll
+D:\capstone version2\RouteOptimization3\RouteOptimization.Core\bin\Debug\RouteOptimization.Infrastructure.pdb
+D:\capstone version2\RouteOptimization3\RouteOptimization.Core\bin\Debug\EntityFramework.xml
+D:\capstone version2\RouteOptimization3\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.csprojResolveAssemblyReference.cache
+D:\capstone version2\RouteOptimization3\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.dll
+D:\capstone version2\RouteOptimization3\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.pdb

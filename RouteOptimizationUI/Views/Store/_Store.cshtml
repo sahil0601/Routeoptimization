@@ -1,0 +1,58 @@
+﻿@model IEnumerable<RouteOptimization.Infrastructure.Store>
+ @*<script src="~/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>*@
+
+<div style="width: 100%; height: 400px; overflow: scroll; border: 5px black; background-color: #ccc;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.Address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Retailer.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StoreNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address.Address1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Retailer.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", item)
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.StoreID })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

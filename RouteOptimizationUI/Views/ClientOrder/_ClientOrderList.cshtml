@@ -1,0 +1,33 @@
+﻿@model IEnumerable<RouteOptimization.Infrastructure.OrderProduct>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Order ID")
+        </th>
+        <th>
+            @Html.DisplayName("Product Name")
+        </th>
+        <th>
+            @Html.DisplayName("Quantity")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        
+    </tr>
+}
+
+</table>

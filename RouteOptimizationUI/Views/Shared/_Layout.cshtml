@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Route Optimization</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+       
+
+    <header id="header">
+        <div id="logo-group">
+            <span id="logo"> <img src="~/Content/Images/tnalogoblack.png" alt="TN Analytics"> </span>
+        </div>
+        <div class="pull-right">
+
+            <!-- pulled right: nav area -->
+            <div class="pull-right">
+                <!-- logout button -->
+                <div class="btn-header transparent pull-right" id="logout">
+                    <span><a data-logout-msg="You can improve your security further after logging out by closing this opened browser" data-action="userLogout" href="@Url.Action("Logout", "Login")" title="Sign Out"><i class="fa fa-sign-out"></i></a></span>
+                </div>
+                <!-- end logout button -->
+                <!-- collapse menu button -->
+                <div id="hide-menu" class="btn-header pull-right">
+                    <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+                </div>
+                <!-- end collapse menu -->
+                <!-- search mobile button (this is hidden till mobile view port) -->
+                <div class="btn-header transparent pull-right" id="search-mobile">
+                    <span><a href="javascript:void(0)" title="Search"></a></span>
+                </div>
+                <!-- end search mobile button -->
+                <!-- fullscreen button -->
+                <div class="btn-header transparent pull-right" id="fullscreen">
+                    <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+                </div>
+                <!-- end fullscreen button -->
+                
+            </div>
+            </div>
+
+</header>
+
+
+
+
+
+
+
+
+        <aside id="left-panel">
+
+            <!-- User info -->
+            <div class="login-info">
+                <span>
+                    <!-- User image size is adjusted inside CSS, it should stay as it -->
+                    <a href="@Url.Action("Index", "Main")">
+                        @{
+                            string profileImg = "~/Content/Images/avatars/male.png";
+
+                            <img src="@Url.Content(profileImg)" alt="me" class="online">
+                            <span>@if (Session["Name"] != null)
+                                  { 
+                                @Session["Name"].ToString();
+                            }
+                            </span>
+                            <i class="fa fa-angle-down"></i>
+                        }
+                    </a>
+                </span>
+            </div>
+            <!-- end user info -->
+            <!-- NAVIGATION : This navigation is also responsive
+
+            To make this navigation dynamic please make sure to link the node
+            (the reference to the nav > ul) after page load. Or the navigation
+            will not initialize.
+            -->
+            <nav>
+                <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+                Please note that these links work a bit different than
+                traditional href="" links. See documentation for details.
+                -->
+@if (Session["role"] != null) { 
+                if(@Session["role"].ToString()=="1")
+                { 
+
+                <ul style="">
+
+                    <li id="lnkHome">
+                        <a href="@Url.Action("Index", "Main")" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i><span class="menu-item-parent">Home</span></a>
+                    </li>
+
+                    <li id="lnkMyWork">
+                        <a href="@Url.Action("Create", "Users")"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">User</span></a>
+                    </li>
+
+                    <li id="lnkDashboard">
+                        <a href="@Url.Action("Index", "Retailer")"><i class="fa fa-lg fa-fw fa-table"></i><span class="menu-item-parent">Retailer</span></a>
+                    </li>
+
+                    <li id="lnkDashboard">
+                        <a href="@Url.Action("Index", "Store")"><i class="fa fa-lg fa-fw fa-table"></i><span class="menu-item-parent">Store</span></a>
+                    </li>
+
+                    <li id="lnkDashboard">
+                        <a href="@Url.Action("Index", "Product")"><i class="fa fa-lg fa-fw fa-table"></i><span class="menu-item-parent">Product</span></a>
+                    </li>
+                    <li id="lnkDashboard">
+                        <a href="@Url.Action("Create", "ClientOrder")"><i class="fa fa-lg fa-fw fa-table"></i><span class="menu-item-parent">Customer Order</span></a> 
+                    </li>
+                    <li id="lnkDashboard">
+                        <a href="@Url.Action("Index", "Order")"><i class="fa fa-lg fa-fw fa-table"></i><span class="menu-item-parent">Order</span></a>
+                    </li>
+                    <li id="lnkDashboard">
+                        <a href="@Url.Action("Index", "Roster")"><i class="fa fa-lg fa-fw fa-table"></i><span class="menu-item-parent">Roster</span></a>
+                    </li>
+                    </ul>
+                }
+}
+            </nav>
+                    
+            <span class="minifyme" data-action="minifyMenu">
+                <i class="fa fa-arrow-circle-left hit"></i>
+            </span>
+        </aside>
+
+        <!-- MAIN PANEL -->
+        <div id="main">
+            <!-- RIBBON -->
+            <div id="ribbon_gng">
+                @*<span class="ribbon-button-alignment btn btn-ribbon" data-html="true" data-original-title="message..." data-placement="bottom" data-title="refresh" id="refresh"></span>*@
+                <!-- breadcrumb -->
+                @*<div id="pageTitle" class="breadcrumb">
+                    </div>*@
+                @*<div id="pageTitle"></div>*@
+                <!-- end breadcrumb -->
+
+            </div>
+            <!-- END RIBBON -->
+            <!-- MAIN CONTENT -->
+
+            <div id="content">
+                @RenderBody()
+
+            </div>
+            <!-- END MAIN CONTENT -->
+
+        </div>
+
+        <div id="shortcut">
+            [METRO_SHORTCUT]
+        </div>
+
+        <!-- PAGE FOOTER -->
+    <div class="page-footer">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6">
+                <span class="txt-color-white">ONE MDC © 2015</span>
+            </div>
+            <div class="pull-right">
+                <a href="http://www.instantssl.com/wildcard-ssl.html" style="text-decoration:none; ">
+                    <img alt="Wildcard SSL" src="~/Content/Images/ssl/comodo_secure_76x26_transp.png" style="border: 0px;" />
+                    <span style="font-weight:bold;font-size:12px; padding-right:10px; color:#77BAE4;">SSL Certificate</span>
+                </a>
+            </div>
+        </div>
+    </div>
+           
+        <!-- END PAGE FOOTER -->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
