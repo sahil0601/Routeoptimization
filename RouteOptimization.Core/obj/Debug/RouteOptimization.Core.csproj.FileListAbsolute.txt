@@ -16,3 +16,12 @@ D:\capstone version2\RouteOptimization3\RouteOptimization.Core\bin\Debug\EntityF
 D:\capstone version2\RouteOptimization3\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.csprojResolveAssemblyReference.cache
 D:\capstone version2\RouteOptimization3\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.dll
 D:\capstone version2\RouteOptimization3\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.pdb
+C:\Users\sahil\Source\Repos\Routeoptimization\RouteOptimization.Core\bin\Debug\RouteOptimization.Core.dll
+C:\Users\sahil\Source\Repos\Routeoptimization\RouteOptimization.Core\bin\Debug\RouteOptimization.Core.pdb
+C:\Users\sahil\Source\Repos\Routeoptimization\RouteOptimization.Core\bin\Debug\RouteOptimization.Infrastructure.dll
+C:\Users\sahil\Source\Repos\Routeoptimization\RouteOptimization.Core\bin\Debug\EntityFramework.dll
+C:\Users\sahil\Source\Repos\Routeoptimization\RouteOptimization.Core\bin\Debug\RouteOptimization.Infrastructure.pdb
+C:\Users\sahil\Source\Repos\Routeoptimization\RouteOptimization.Core\bin\Debug\EntityFramework.xml
+C:\Users\sahil\Source\Repos\Routeoptimization\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.csprojResolveAssemblyReference.cache
+C:\Users\sahil\Source\Repos\Routeoptimization\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.dll
+C:\Users\sahil\Source\Repos\Routeoptimization\RouteOptimization.Core\obj\Debug\RouteOptimization.Core.pdb

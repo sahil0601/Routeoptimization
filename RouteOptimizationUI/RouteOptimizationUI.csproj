@@ -379,9 +379,6 @@
     <Content Include="Content\Images\superbox\superbox-thumb-9.jpg" />
     <Content Include="Content\Images\SYS-SOLP_01.jpg" />
     <Content Include="Content\Images\SYS-SOLP_01.png" />
-    <Content Include="Content\Images\tna-iphoneview.png" />
-    <Content Include="Content\Images\tnalogoblack.png" />
-    <Content Include="Content\Images\tnalogowhite.png" />
     <Content Include="Content\Images\versions\ajaxversion.png" />
     <Content Include="Content\Images\versions\angularversion.png" />
     <Content Include="Content\Images\versions\htmlversion.png" />
